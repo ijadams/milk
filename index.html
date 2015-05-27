@@ -31,22 +31,95 @@ article {
 
 
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
 
+<a id="m1" onclick="speed(0.5);" href="#">
 <article>
 <!--  Content  -->
 </article>
-  
+ </a>
+
 <video autoplay loop poster="" id="video-background" muted>
   <source src="img/milk2.mp4" type="video/mp4">
 </video>
+
 
 <audio autoplay loop>
   <source src="img/rob.mp3" type="audio/mpeg">
 </audio>  
 
-<script>
+<audio id="linkAudio">
+  <source src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/milk.mp3" type="audio/mpeg">
+</audio>
+
+<a href="javascript:speed(0.5)" class="pblink">.5x</a>  
+<a href="javascript:speed(1.0)" class="pblink">1x</a>  
+<a href="javascript:speed(1.2)" class="pblink">1.2x</a>  
+<a href="javascript:speed(1.4)" class="pblink">1.4x</a>  
+<a href="javascript:speed(2.0)" class="pblink">2x</a>  
+
+<script>//define shuffle function
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+
+
+//VIDEO
+
+function speed(x) {
+  var myVid=document.getElementById("video-background");
+  var counter = 0;
+  console.log(counter)
+}
+
+
+/*
+function speed(x) {
+  var myVid=document.getElementById("video-background");
+  var counter = x;
+  return counter++;
+  console.log(counter);
+
+}
+*/
+
+
+//AUDIO
+var milkSounds = [
+"http://www.instantrapairhorn.com/wp-content/uploads/2014/03/instantrapairhorn.mp3",
+"https://ssl.gstatic.com/dictionary/static/sounds/de/0/milk.mp3",
+"http://dictionary.cambridge.org/us/media/british/uk_pron/u/ukm/ukmil/ukmilea020.mp3",
+"http://dictionary.cambridge.org/us/media/british/us_pron/m/mil/milk_/milk.mp3"
+]
+
+milkSounds = shuffle(milkSounds);
+
+//APPEND
+ document.getElementById("m1").addEventListener("click", function () {
+    var audio = document.getElementById("linkAudio");
+    milkSounds = shuffle(milkSounds);
+    audio.src = milkSounds[0];
+    return audio.play();
+  });
+
 </script>
+
 </body>
 </html>
