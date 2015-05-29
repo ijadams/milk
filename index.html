@@ -4,7 +4,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: url(milk.jpg) #333;
+  background: white;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -38,112 +38,148 @@ article {
 
 }
 
+#plea {
+   position: absolute;
+   top: 20%; 
+   font-size: 3em;
+   color: gray; 
+   font-family: sans-serif;
+   font-style: italic;
+}
+
+@media (min-width:501px){
+  #plea  {
+    display:none;
+  }
+}
+@media (max-width:500px){  
+  video  {
+    display:none;
+  }
+
+}
+
+
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
-<p id="distance">Distance: <span>0</span>px</p>
 
-<a id="m1" onclick="speed(0.5);" href="#">
-<article>
-<!--  Content  --> <div id="element"></div>
-</article>
- </a>
+  <a id="m1" href="#">
+    <article>
+      <div id="plea">
+        <center>
+        PLEASE OPEN THIS SITE ON A DESKTOP COMPUTER, THANKS!<br>
+        <span style="font-size:12px;">(or if you are on a desktop make this window bigger?)</span>
+        <br><br>
+          <img src="img/desktop.jpg" height="100" width="100"></center>
+      </div>
+        <!--  center  --> 
+      <div id="element"></div>
+    </article>
+  </a>
 
-<video autoplay loop poster="" id="video-background" muted>
-  <source src="img/milk2020.mp4" type="video/mp4">
-</video>
-
-
-<audio autoplay loop>
-  <source src="img/rob2.mp3" type="audio/mpeg">
-</audio>  
-
-<audio id="linkAudio">
-  <source src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/milk.mp3" type="audio/mpeg">
-</audio>
+  <video autoplay loop poster="" id="video-background" muted>
+    <source src="img/milk2020.mp4" type="video/mp4">
+  </video>
 
 
-<script>//define shuffle function
-function shuffle(array) {
-  var m = array.length, t, i;
+  <audio autoplay loop>
+    <source src="img/rob2.mp3" type="audio/mpeg">
+  </audio>  
 
-  // While there remain elements to shuffle…
-  while (m) {
+  <audio id="linkAudio">
+    <source src="https://ssl.gstatic.com/dictionary/static/sounds/de/0/milk.mp3" type="audio/mpeg">
+  </audio>
 
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
 
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
+<script>
+$( document ).ready(function() {
+if ($(window).width() < 440) {
+   alert('Please open this site on a desktop computer, thanks!');
 }
+});
 
+  //do the cupid shuffle
+  function shuffle(array) {
+    var m = array.length, t, i;
 
-//VIDEO
-
-var myVid=document.getElementById("video-background");
-
-
-(function() {
-    
-    var mX, mY, distance,
-        $distance = $('#distance span'),
-        $element  = $('#element');
-
-    function calculateDistance(elem, mouseX, mouseY) {
-        return Math.floor(Math.sqrt(Math.pow(mouseX - (elem.offset().left+(elem.width()/2)), 2) + Math.pow(mouseY - (elem.offset().top+(elem.height()/2)), 2)));
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
     }
 
-    $(document).mousemove(function(e) {  
-        mX = e.pageX;
-        mY = e.pageY;
-        distance = calculateDistance($element, mX, mY);
-        $distance.text(distance);  
-          if (distance < 300 ) {
-            myVid.playbackRate = 1;
-          } else if (distance > 300 && distance < 500) {
-            myVid.playbackRate = 3;
-          } else {
-            myVid.playbackRate = 5;
-          }
-    });
-
-})();
+    return array;
+  }
 
 
-//AUDIO
-var milkSounds = [
-"img/airhorn.mp3",
-"img/milk1.mp3",
-"img/milk2.mp3",
-"img/milk2.mp3",
-"img/milk1.mp3",
-"img/milk3.mp3",
-"img/milk4.mp3",
-"img/milk3.mp3",
-"img/milk4.mp3",
-"img/milk5.ogg",
-"img/milk6.ogg",
-"img/milk7.mp3",
-"img/milk8.mp3",
-"img/milk9.mp3"
-]
+  //VIDEO
 
-milkSounds = shuffle(milkSounds);
+  var myVid=document.getElementById("video-background");
 
-//APPEND
-document.getElementById("m1").addEventListener("click", function () {
-    var audio = document.getElementById("linkAudio");
-    milkSounds = shuffle(milkSounds);
-    audio.src = milkSounds[0];
-    return audio.play();
-});
+  (function() {
+      
+      var mX, mY, distance,
+          $distance = $('#distance span'),
+          $element  = $('#element');
+
+      function calculateDistance(elem, mouseX, mouseY) {
+          return Math.floor(Math.sqrt(Math.pow(mouseX - (elem.offset().left+(elem.width()/2)), 2) + Math.pow(mouseY - (elem.offset().top+(elem.height()/2)), 2)));
+      }
+
+      $(document).mousemove(function(e) {  
+          mX = e.pageX;
+          mY = e.pageY;
+          distance = calculateDistance($element, mX, mY);
+            if (distance < 300 ) {
+              myVid.playbackRate = 1;
+            } else if (distance > 300 && distance < 500) {
+              myVid.playbackRate = 3;
+            } else {
+              myVid.playbackRate = 5;
+            }
+      });
+
+  })();
+
+
+  //AUDIO
+  var milkSounds = [
+    "img/airhorn.mp3",
+    "img/milk1.mp3",
+    "img/milk2.mp3",
+    "img/milk2.mp3",
+    "img/milk1.mp3",
+    "img/milk3.mp3",
+    "img/milk4.mp3",
+    "img/milk3.mp3",
+    "img/milk4.mp3",
+    "img/milk5.ogg",
+    "img/milk6.ogg",
+    "img/milk7.mp3",
+    "img/milk8.mp3",
+    "img/milk9.mp3",
+    "img/milk10.mp3",
+    "img/milk11.mp3",
+    "img/milk12.mp3",
+    "img/milk13.mp3",
+    "img/milk14.mp3",
+    "img/milk15.mp3"
+
+  ]
+
+  milkSounds = shuffle(milkSounds);
+
+  //APPEND
+  document.getElementById("m1").addEventListener("click", function () {
+      var audio = document.getElementById("linkAudio");
+      milkSounds = shuffle(milkSounds);
+      audio.src = milkSounds[0];
+      return audio.play();
+  });
 
 </script>
 
