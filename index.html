@@ -85,7 +85,7 @@ article {
   </video>
 
 
-  <audio autoplay loop>
+  <audio autoplay loop id="rob">
     <source src="img/rob2.mp3" type="audio/mpeg">
   </audio>  
 
@@ -116,9 +116,10 @@ if ($(window).width() < 440) {
   }
 
 
-  //VIDEO
+  //Slo Mo
 
   var myVid=document.getElementById("video-background");
+  var myAud=document.getElementById("rob");
 
   (function() {
       
@@ -136,10 +137,13 @@ if ($(window).width() < 440) {
           distance = calculateDistance($element, mX, mY);
             if (distance < 300 ) {
               myVid.playbackRate = 1;
-            } else if (distance > 300 && distance < 500) {
+              myAud.playbackRate = 0.75;
+            } else if (distance > 300 && distance < 420) {
               myVid.playbackRate = 3;
+              myAud.playbackRate = 1;
             } else {
               myVid.playbackRate = 5;
+              myAud.playbackRate = 1.5;
             }
       });
 
@@ -173,7 +177,7 @@ if ($(window).width() < 440) {
 
   milkSounds = shuffle(milkSounds);
 
-  //APPEND
+  //APPEND Samples
   document.getElementById("m1").addEventListener("click", function () {
       var audio = document.getElementById("linkAudio");
       milkSounds = shuffle(milkSounds);
