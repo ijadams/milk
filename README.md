@@ -1,1 +1,1 @@
-For those passionate about <a href="babesuniverse.net/milk">milk</a>
+For those passionate about <a href="http://babesuniverse.net/milk">milk</a>
